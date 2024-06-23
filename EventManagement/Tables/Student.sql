@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[Student]
+(
+	[Stu_Id] INT NOT NULL PRIMARY KEY IDENTITY,
+	[Student_name] NVARCHAR(100) NOT NULL,
+	[Stu_Email] NVARCHAR(250) NOT NULL,
+	[Dept_Id] INT NOT NULL,
+	[Year] INT NOT NULL,
+
+	CONSTRAINT [Fk_Dept_Id] FOREIGN KEY (Dept_Id) REFERENCES Department(Dept_Id) ON DELETE NO ACTION
+)

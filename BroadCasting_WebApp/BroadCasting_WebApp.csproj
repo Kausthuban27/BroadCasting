@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Components\" />
+    <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BlazorStrap" Version="5.2.100.61524" />
+    <PackageReference Include="BlazorStrap.V5" Version="5.2.100" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BroadCastingAPI\BroadCastingAPI.csproj" />
+  </ItemGroup>
+
+</Project>

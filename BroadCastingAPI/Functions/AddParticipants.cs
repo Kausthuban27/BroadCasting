@@ -25,6 +25,7 @@ namespace BroadCastingAPI.Functions
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType:typeof(string))]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.BadRequest, contentType: "text/plain", bodyType:typeof(string))]
         [Function("AddParticipants")]
+
         public IActionResult Run([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "RegiterParticipants")] HttpRequestData req)
         {
             return new OkObjectResult("Heelo");

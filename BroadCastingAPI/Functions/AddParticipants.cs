@@ -9,7 +9,6 @@ using Microsoft.OpenApi.Models;
 using System.Net;
 using EntityType = BroadCastingAPI.Models.Participant;
 
-
 namespace BroadCastingAPI.Functions
 {
     public class AddParticipants

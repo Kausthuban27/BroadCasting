@@ -15,6 +15,8 @@ public partial class EventManagementContext : DbContext
     {
     }
 
+    public virtual DbSet<Admin> Admins { get; set; }
+
     public virtual DbSet<Department> Departments { get; set; }
 
     public virtual DbSet<Participant> Participants { get; set; }
@@ -30,6 +32,17 @@ public partial class EventManagementContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Admin>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Admin__3214EC07A30FE685");
+
+            entity.ToTable("Admin");
+
+            entity.Property(e => e.Email).HasMaxLength(250);
+            entity.Property(e => e.Name).HasMaxLength(100);
+            entity.Property(e => e.Password).HasMaxLength(250);
+        });
+
         modelBuilder.Entity<Department>(entity =>
         {
             entity.HasKey(e => e.DeptId).HasName("PK__Departme__72ABC2CCD00F5D54");

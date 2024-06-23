@@ -1,4 +1,21 @@
 ﻿@page "/"
 
 <PageTitle>Home</PageTitle>
-<h3>Welcome All to Live Telecast Event</h3>
+<h3 class="text-center fs-3 fw-bolder">Welcome All to Live Telecast Event, Register Below</h3>
+
+<div class="container-fluid d-flex justify-content-center mt-3">
+    <div class="border border-black rounded p-4 w-50"> 
+        <EditForm formName="ParticipantRegistrationForm" class="form-group" Model="participants" OnSubmit="RegisterParticipant">
+
+        </EditForm>
+    </div>
+</div>
+
+@code
+{
+    public Participant participants { get; set; } = new();
+    private void RegisterParticipant()
+    {
+        
+    }
+}

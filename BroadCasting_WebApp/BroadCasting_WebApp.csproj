@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Components\" />
     <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
@@ -17,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BroadCastingAPI\BroadCastingAPI.csproj" />
+    <ProjectReference Include="..\BroadCastAPI\BroadCastAPI.csproj" />
   </ItemGroup>
 
 </Project>

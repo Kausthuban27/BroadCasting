@@ -1,33 +1,46 @@
 ﻿@page "/login"
+@inject IAdminService adminService
 
 <div class="text-center">
     <h3>Admin Login Form</h3>
     <span class="oi oi-person fs-3"></span>
 </div>
 
-<div class="container-fluid d-flex justify-content-center align-items-center mt-3">
-    <div class="border border-dark rounded p-4">
-        <EditForm formName="AdminLoginForm" Model="admin" OnSubmit="LoginAdmin">
-            <div class="mb-3">
-                <label for="username">Username</label>
-                <InputText type="text" class="form-control" id="username" placeholder="Enter Admin Username" @bind-Value=admin.Name required />
-            </div>
-            <div class="mb-3">
-                <label for="password">Password</label>
-                <InputText type="password" class="form-control" id="password" placeholder="Enter Admin Password" @bind-Value=admin.Password required />
-            </div>
-            <div class="mb-3">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </EditForm>
+@if(isAdmin)
+{
+    
+}
+else
+{
+    <div class="container-fluid d-flex justify-content-center align-items-center mt-3">
+        <div class="border border-dark rounded p-4">
+            <EditForm formName="AdminLoginForm" Model="admin" OnSubmit="LoginAdmin">
+                <div class="mb-3">
+                    <label for="username">Username</label>
+                    <InputText type="text" class="form-control" id="username" placeholder="Enter Admin Username" @bind-Value=admin.Name required />
+                </div>
+                <div class="mb-3">
+                    <label for="password">Password</label>
+                    <InputText type="password" class="form-control" id="password" placeholder="Enter Admin Password" @bind-Value=admin.Password required />
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </EditForm>
+        </div>
     </div>
-</div>
+}
 
 @code 
 {
     public Admin admin { get; set; } = new();
-    private void LoginAdmin()
+    private bool isAdmin = false;
+    private async void LoginAdmin()
     {
-
+        var res = await adminService.AdminLogin(admin.Name);
+        if(res.ToString() != null)
+        {
+            isAdmin = true;
+        }
     }
 }

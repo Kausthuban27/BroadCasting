@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace BroadCastingAPI.Models;
+namespace BroadCastAPI.Models;
 
 public partial class EventManagementContext : DbContext
 {
@@ -34,7 +34,7 @@ public partial class EventManagementContext : DbContext
     {
         modelBuilder.Entity<Admin>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Admin__3214EC07A30FE685");
+            entity.HasKey(e => e.Id).HasName("PK__Admin__3214EC07C87BE600");
 
             entity.ToTable("Admin");
 
@@ -45,7 +45,7 @@ public partial class EventManagementContext : DbContext
 
         modelBuilder.Entity<Department>(entity =>
         {
-            entity.HasKey(e => e.DeptId).HasName("PK__Departme__72ABC2CCD00F5D54");
+            entity.HasKey(e => e.DeptId).HasName("PK__Departme__72ABC2CC9E16B24D");
 
             entity.ToTable("Department");
 
@@ -57,7 +57,7 @@ public partial class EventManagementContext : DbContext
 
         modelBuilder.Entity<Participant>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Particip__3214EC07F141D0B1");
+            entity.HasKey(e => e.Id).HasName("PK__Particip__3214EC0732C8F66C");
 
             entity.Property(e => e.DateOfRegistration)
                 .HasPrecision(6)
@@ -79,7 +79,7 @@ public partial class EventManagementContext : DbContext
 
         modelBuilder.Entity<Staff>(entity =>
         {
-            entity.HasKey(e => e.StaffId).HasName("PK__Staff__32D1F4235F1F63CB");
+            entity.HasKey(e => e.StaffId).HasName("PK__Staff__32D1F423A2D0D470");
 
             entity.Property(e => e.StaffId).HasColumnName("Staff_Id");
             entity.Property(e => e.DeptId).HasColumnName("Dept_Id");
@@ -104,7 +104,7 @@ public partial class EventManagementContext : DbContext
 
         modelBuilder.Entity<Student>(entity =>
         {
-            entity.HasKey(e => e.StuId).HasName("PK__Student__DD8D49E16A1BACCB");
+            entity.HasKey(e => e.StuId).HasName("PK__Student__DD8D49E1DF151293");
 
             entity.ToTable("Student");
 
@@ -125,7 +125,7 @@ public partial class EventManagementContext : DbContext
 
         modelBuilder.Entity<Subject>(entity =>
         {
-            entity.HasKey(e => e.SubId).HasName("PK__Subjects__DFB18CCD89A7833E");
+            entity.HasKey(e => e.SubId).HasName("PK__Subjects__DFB18CCD338F0A55");
 
             entity.Property(e => e.SubId).HasColumnName("Sub_Id");
             entity.Property(e => e.SubName)

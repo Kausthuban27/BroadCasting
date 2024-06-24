@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BroadCastingAPI.Models;
+namespace BroadCastAPI.Models;
 
 public partial class Staff
 {

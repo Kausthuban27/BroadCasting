@@ -1,4 +1,5 @@
 ﻿@page "/"
+@inject IParticipantsServices participantService
 
 <PageTitle>Home</PageTitle>
 <h3 class="text-center fs-3 fw-bolder">Welcome All to Live Telecast Event, Register Below</h3>
@@ -46,8 +47,12 @@
 {
     public Participant participants { get; set; } = new();
 
-    private void RegisterParticipant()
+    private async void RegisterParticipant()
     {
-        participants = new();
+        var res = await participantService.AddParticipants(participants);
+        if(res.ToString() != null)
+        {
+            participants = new();
+        }
     }
 }

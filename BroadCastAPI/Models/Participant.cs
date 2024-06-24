@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BroadCastingAPI.Models;
+namespace BroadCastAPI.Models;
 
 public partial class Participant
 {
@@ -15,7 +15,7 @@ public partial class Participant
 
     public int DeptId { get; set; }
 
-    public DateTime DateOfRegistration { get; set; } = DateTime.Now;
+    public DateTime DateOfRegistration { get; set; }
 
     public virtual Department Dept { get; set; } = null!;
 }

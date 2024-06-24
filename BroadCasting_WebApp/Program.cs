@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using BlazorStrap;
+using BroadCasting_WebApp.Services.HttpServices;
+using BroadCasting_WebApp.Models;
+using BroadCasting_WebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddBlazorStrap();
+builder.Services.AddHttpServices();
+builder.Services.Configure<BroadCastAPIConfig>(builder.Configuration.GetSection("DataApi"));
 
 var app = builder.Build();
 

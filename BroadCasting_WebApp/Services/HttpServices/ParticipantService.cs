@@ -9,7 +9,7 @@ namespace BroadCasting_WebApp.Services.HttpServices
     {
         private readonly BroadCastAPIConfig _config;
         private readonly ICRUDService _crudService;
-        private readonly Uri _baseUrl;
+        private readonly Uri _baseUrl, _loginParticipantUrl;
         public ParticipantService(IOptions<BroadCastAPIConfig> config, ICRUDService service)
         {
             _config = config.Value;
@@ -20,10 +20,16 @@ namespace BroadCasting_WebApp.Services.HttpServices
             }
             var baseUrl = new Uri(_config.BaseUrl, UriKind.Absolute);
             _baseUrl = new(baseUrl, RouteConstants.Participant);
+            _loginParticipantUrl = new(baseUrl, RouteConstants.LoginParticipant);
         }
         public async Task<IActionResult> AddParticipants<T>(T entity) where T : class
         {
             return await _crudService.AddParticipant<T>(_baseUrl, entity);
+        }
+
+        public async Task<IActionResult> GetParticipants(string email, string designation)
+        {
+            return await _crudService.GetParticipant(_loginParticipantUrl, email, designation);
         }
     }
 }

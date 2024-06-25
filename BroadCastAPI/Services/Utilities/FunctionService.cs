@@ -57,7 +57,8 @@ namespace BroadCastAPI.Services.Utilities
             var res = req.CreateResponse();
             try
             {
-                T? requestBody = DeserializeService<T>.DeserializeStream(req.Body);
+                string requestBodyString = await new StreamReader(req.Body).ReadToEndAsync();
+                T? requestBody = JsonConvert.DeserializeObject<T>(requestBodyString);
                 await func(requestBody);
                 res.StatusCode = HttpStatusCode.OK;
                 return res;
@@ -115,6 +116,16 @@ namespace BroadCastAPI.Services.Utilities
                 throw new MissingMemberException();
             }
             return new OkObjectResult("Admin Exisits");
+        }
+
+        public static async Task<IActionResult> GetParticipant(string email, string designation, EventManagementContext context)
+        {
+            var participantExists = await context.Participants.Where(e => e.ParticipantEmail == email && e.Designation == designation).FirstOrDefaultAsync();
+            if (participantExists == null)
+            {
+                throw new MissingMemberException();
+            }
+            return new OkObjectResult("Participant Exisits");
         }
 
         public static async Task<HttpResponseData> HandleErrorResponse(HttpResponseData httpResponseData, Exception ex, List<Type> badRequestExceptions, ILogger? logger = null)

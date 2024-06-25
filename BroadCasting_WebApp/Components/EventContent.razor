@@ -1,0 +1,18 @@
+﻿<h3 class="text-center">EventContent</h3>
+
+<div class="d-flex flex-column justify-content-center">
+    <h3 class="text-center">This is an Event Content Page</h3>
+    <div class="align-self-center">
+        <button class="btn btn-primary" @onclick="LogOut">LogOut</button>
+    </div>
+</div>
+@code 
+{
+    [Parameter]
+    public EventCallback OnLogout { get; set; }
+
+    private async Task LogOut()
+    {
+        await OnLogout.InvokeAsync(null);
+    }
+}

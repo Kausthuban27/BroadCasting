@@ -13,6 +13,8 @@
   <ItemGroup>
     <PackageReference Include="BlazorStrap" Version="5.2.100.61524" />
     <PackageReference Include="BlazorStrap.V5" Version="5.2.100" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.20" />
   </ItemGroup>
 
   <ItemGroup>

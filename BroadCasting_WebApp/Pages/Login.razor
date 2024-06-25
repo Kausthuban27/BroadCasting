@@ -1,5 +1,6 @@
 ﻿@page "/login"
 @inject IAdminService adminService
+@inject NavigationManager navigator
 
 <div class="text-center">
     <h3>Admin Login Form</h3>
@@ -8,7 +9,7 @@
 
 @if(isAdmin)
 {
-    
+    <PassServerData />
 }
 else
 {
@@ -41,6 +42,7 @@ else
         if(res.ToString() != null)
         {
             isAdmin = true;
+            navigator.NavigateTo("/passData");
         }
     }
 }

@@ -66,5 +66,26 @@ namespace BroadCasting_WebApp.Services.HttpServices
                 return new InternalServerErrorResult();
             }
         }
+
+        public async Task<IActionResult> GetParticipant(Uri basePath, string email, string designation)
+        {
+            try
+            {
+                UriBuilder uriBuilder = new UriBuilder(basePath);
+                var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+                query["Email"] = email;
+                query["Designation"] = designation;
+
+                uriBuilder.Query = query.ToString();
+
+                await _httpClient.GetAsync(uriBuilder.Uri);
+                return new OkObjectResult("Participant Exists");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Exception Occurred {ex}");
+                return new InternalServerErrorResult();
+            }
+        }
     }
 }

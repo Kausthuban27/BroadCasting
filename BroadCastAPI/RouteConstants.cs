@@ -10,5 +10,8 @@ namespace BroadCastAPI
     {
         public const string Admin = "LoginAdmin";
         public const string Participant = "RegisterParticipants";
+        public const string LoginParticipant = "LoginParticipants";
+        public const string BroadcastMessage = "BroadcastMessage";
+        public const string Negotiate = "Negotiate";
     }
 }

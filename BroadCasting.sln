@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BroadCasting_WebApp", "Broa
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "EventManagement", "EventManagement\EventManagement.sqlproj", "{F1F2F674-C056-4D8A-B1D7-59D28B8CBE72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BroadCastAPI", "BroadCastAPI\BroadCastAPI.csproj", "{6FC01D85-C0B4-4E21-BB91-9D605802427A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BroadCastAPI", "BroadCastAPI\BroadCastAPI.csproj", "{6FC01D85-C0B4-4E21-BB91-9D605802427A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

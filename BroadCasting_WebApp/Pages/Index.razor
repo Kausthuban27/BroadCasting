@@ -2,57 +2,114 @@
 @inject IParticipantsServices participantService
 
 <PageTitle>Home</PageTitle>
-<h3 class="text-center fs-3 fw-bolder">Welcome All to Live Telecast Event, Register Below</h3>
 
-<div class="container-fluid d-flex justify-content-center mt-5 mb-4">
-    <div class="border border-black rounded p-4 w-25"> 
-        <EditForm formName="ParticipantRegistrationForm" class="form-group" Model="participants" OnSubmit="RegisterParticipant">
-            <div class="mb-3">
-                <label for="name" class="form-label fw-bold">FullName:</label>
-                <InputText class="form-control" type="text" id="name" placeholder="Enter the Username" @bind-Value=participants.ParticipantName required />
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label fw-bold">Email Id:</label>
-                <InputText class="form-control" type="email" id="email" placeholder="Enter the Email" @bind-Value=participants.ParticipantEmail required />
-            </div>
-            <h6 class="fw-bold mt-4 mb-3">Designation:</h6>
-            <div class="@BS.Form_Check_Inline mb-3">
-                <BSInputRadio CheckedValue="@("Student")" id="student" @bind-Value=participants.Designation />
-                <BSLabel class="form-check-label" for="student">Student</BSLabel>
-            </div>
-            <div class="@BS.Form_Check_Inline mb-3">
-                <BSInputRadio CheckedValue="@("Staff")" id="staff" @bind-Value=participants.Designation />
-                <BSLabel class="form-check-label" for="staff">Staff</BSLabel>
-            </div>
-            <div class="mb-3">
-                <label for="dept" class="form-label fw-bold">Department:</label>
-                <BSInput id="dept" Class="form-select" InputType="InputType.Select" @bind-Value=participants.DeptId>
-                    <option selected>Choose your Department</option>
-                    <option value="1">CSE</option>
-                    <option value="2">IT</option>
-                    <option value="3">ECE</option>
-                    <option value="4">EEE</option>
-                    <option value="5">CIVIL</option>
-                    <option value="6">MECH</option>
-                </BSInput>
-            </div>
-            <div class="mb-3">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </EditForm>
+@if(showLoginForm)
+{
+    <h3 class="text-center fs-3 fw-bolder">Welcome All to Live Telecast Event, Register Below</h3>
+
+    <div class="container-fluid d-flex justify-content-center mt-5 mb-4">
+        <div class="border border-black rounded p-4 w-25">
+            <EditForm formName="ParticipantRegistrationForm" class="form-group" Model="participants" OnSubmit="RegisterParticipant">
+                <div class="mb-3">
+                    <label for="name" class="form-label fw-bold">FullName:</label>
+                    <InputText class="form-control" type="text" id="name" placeholder="Enter the Username" @bind-Value=participants.ParticipantName required />
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label fw-bold">Email Id:</label>
+                    <InputText class="form-control" type="email" id="email" placeholder="Enter the Email" @bind-Value=participants.ParticipantEmail required />
+                </div>
+                <h6 class="fw-bold mt-4 mb-3">Designation:</h6>
+                <div class="@BS.Form_Check_Inline mb-3">
+                    <BSInputRadio CheckedValue="@("Student")" id="student" @bind-Value=participants.Designation />
+                    <BSLabel class="form-check-label" for="student">Student</BSLabel>
+                </div>
+                <div class="@BS.Form_Check_Inline mb-3">
+                    <BSInputRadio CheckedValue="@("Staff")" id="staff" @bind-Value=participants.Designation />
+                    <BSLabel class="form-check-label" for="staff">Staff</BSLabel>
+                </div>
+                <div class="mb-3">
+                    <label for="dept" class="form-label fw-bold">Department:</label>
+                    <BSInput id="dept" Class="form-select" InputType="InputType.Select" @bind-Value=participants.DeptId>
+                        <option selected>Choose your Department</option>
+                        <option value="1">CSE</option>
+                        <option value="2">IT</option>
+                        <option value="3">ECE</option>
+                        <option value="4">EEE</option>
+                        <option value="5">CIVIL</option>
+                        <option value="6">MECH</option>
+                    </BSInput>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </EditForm>
+            <h6>Already Existing Participant <NavLink href="" @onclick="ShowLoginForm">Login Here</NavLink></h6>
+        </div>
     </div>
-</div>
+}
+else if(!showLoginForm && isParticipant)
+{
+    <EventContent OnLogout="HandleLogout"/>
+}
+else
+{
+    <h3 class="text-center fs-3 fw-bolder">Welcome All to Live Telecast Event, Login to Enjoy</h3>
+    <div class="container-fluid d-flex justify-content-center mt-5 mb-4">
+        <div class="border border-black rounded p-4 w-25">
+            <EditForm formName="ParticipantLoginForm" class="form-group" Model="loginParticipants" OnSubmit="LoginParticipant">
+                <div class="mb-3">
+                    <label for="email" class="form-label fw-bold">Email Id:</label>
+                    <InputText class="form-control" type="email" id="email" placeholder="Enter the Email" @bind-Value=loginParticipants.Email required />
+                </div>
+                <h6 class="fw-bold mt-4 mb-3">Designation:</h6>
+                <div class="@BS.Form_Check_Inline mb-3">
+                    <BSInputRadio CheckedValue="@("Student")" id="student" @bind-Value=loginParticipants.Designation />
+                    <BSLabel class="form-check-label" for="student">Student</BSLabel>
+                </div>
+                <div class="@BS.Form_Check_Inline mb-3">
+                    <BSInputRadio CheckedValue="@("Staff")" id="staff" @bind-Value=loginParticipants.Designation />
+                    <BSLabel class="form-check-label" for="staff">Staff</BSLabel>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </EditForm>
+            <h6>Have not Registered <NavLink href="" @onclick="ShowLoginForm">SignUp Here</NavLink></h6>
+        </div>
+    </div>
+}
 
 @code
 {
     public Participant participants { get; set; } = new();
+    public Participants loginParticipants { get; set; } = new();
+    private bool showLoginForm = false;
+    private bool isParticipant = false;
 
     private async void RegisterParticipant()
     {
         var res = await participantService.AddParticipants(participants);
         if(res.ToString() != null)
         {
-            participants = new();
+            participants = new() { };
         }
+    }
+    private void ShowLoginForm()
+    {
+        showLoginForm = !showLoginForm;
+    }
+    private async void LoginParticipant()
+    {
+        var res = await participantService.GetParticipants(loginParticipants.Email, loginParticipants.Designation);
+        if(res.ToString() != null)
+        {
+            isParticipant = true;
+        }
+    }
+
+    private void HandleLogout()
+    {
+        isParticipant = false;
+        showLoginForm = true;
     }
 }

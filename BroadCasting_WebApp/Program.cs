@@ -4,8 +4,6 @@ using BlazorStrap;
 using BroadCasting_WebApp.Services.HttpServices;
 using BroadCasting_WebApp.Models;
 using BroadCasting_WebApp.Services;
-using BroadCasting_WebApp.Hubs;
-using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +12,6 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddBlazorStrap();
 builder.Services.AddHttpServices();
-builder.Services.AddSignalR();
-builder.Services.AddResponseCompression();
 
 builder.Services.Configure<BroadCastAPIConfig>(builder.Configuration.GetSection("DataApi"));
 
@@ -33,7 +29,6 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.MapBlazorHub();
-app.MapHub<DataHub>("/datahub");
 app.MapFallbackToPage("/_Host");
 
 app.Run();

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
+using SignalRHub.Services;
 
 var host = new HostBuilder()
     .ConfigureFunctionsWebApplication()
@@ -16,12 +17,11 @@ var host = new HostBuilder()
         services.ConfigureFunctionsApplicationInsights();
         var configuration = context.Configuration;
         string connectionString = configuration.GetSection("ConnectionStrings:defaultConnection").Value!;
-        services.AddDbContext<EventManagementContext>(options => options.UseSqlServer(connectionString, serverOptions =>
-        {
-            serverOptions.EnableRetryOnFailure();
-        }));
+        services.AddDbContext<EventManagementContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Scoped);
+        services.AddSignalR();
         services.AddScoped<ICRUDService, CRUDService>();
         services.AddScoped<IEntityService, EntityService>();
+        services.AddSingleton<IHubContextAccessor, HubContextAccessor>();
     })
     .Build();
 

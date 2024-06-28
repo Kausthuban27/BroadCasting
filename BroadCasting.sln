@@ -9,6 +9,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "EventManagement", "EventMan
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BroadCastAPI", "BroadCastAPI\BroadCastAPI.csproj", "{6FC01D85-C0B4-4E21-BB91-9D605802427A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRHub", "SignalRHub\SignalRHub.csproj", "{CDCC8BB3-504C-4CBA-9FF1-0878B9820D79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{6FC01D85-C0B4-4E21-BB91-9D605802427A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FC01D85-C0B4-4E21-BB91-9D605802427A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FC01D85-C0B4-4E21-BB91-9D605802427A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDCC8BB3-504C-4CBA-9FF1-0878B9820D79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDCC8BB3-504C-4CBA-9FF1-0878B9820D79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDCC8BB3-504C-4CBA-9FF1-0878B9820D79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDCC8BB3-504C-4CBA-9FF1-0878B9820D79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

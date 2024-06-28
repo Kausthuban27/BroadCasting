@@ -1,12 +1,5 @@
-﻿#nullable disable
-using BroadCastAPI.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BroadCastAPI.Services.DataOperations
 {
@@ -29,6 +22,25 @@ namespace BroadCastAPI.Services.DataOperations
         public Task<List<T>> GetEntity<T>(T entity, DbContext context) where T : class
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<T>> GetUpdatedEventContent<T>(DbContext context) where T : class
+        {
+            var dbSet = context.Set<T>();
+            return await dbSet.AsNoTracking().ToListAsync();
+        }
+        public async Task<List<T>> GetEventContent<T>(DbContext context) where T : class
+        {
+            try
+            {
+                var dbSet = context.Set<T>();
+                return await dbSet.AsNoTracking().ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception occured {ex}");
+                return new List<T> { };
+            }
         }
 
         public Task SaveEntity<T>(T entity, DbContext context)

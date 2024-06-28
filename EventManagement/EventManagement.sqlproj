@@ -65,5 +65,6 @@
     <Build Include="Tables\Staff.sql" />
     <Build Include="Tables\Participants.sql" />
     <Build Include="Tables\Admin.sql" />
+    <Build Include="Tables\EventContent.sql" />
   </ItemGroup>
 </Project>

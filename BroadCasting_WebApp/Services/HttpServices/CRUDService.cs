@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
+using System.Net;
 using System.Text;
 using System.Web;
 using System.Web.Http;
@@ -65,6 +66,23 @@ namespace BroadCasting_WebApp.Services.HttpServices
             {
                 return new InternalServerErrorResult();
             }
+        }
+
+        public async Task<List<T>> GetContent<T>(Uri basePath) where T : class
+        {
+            UriBuilder uriBuilder = new UriBuilder(basePath);
+            HttpResponseMessage res = await _httpClient.GetAsync(uriBuilder.Uri);
+            if(res.IsSuccessStatusCode)
+            {
+                string jsonResponse = await res.Content.ReadAsStringAsync();
+                var jsonString = JsonConvert.DeserializeObject<List<T>>(jsonResponse, new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                    DefaultValueHandling = DefaultValueHandling.Ignore,
+                });
+                return jsonString!;
+            }
+            return new List<T> { };
         }
 
         public async Task<IActionResult> GetParticipant(Uri basePath, string email, string designation)

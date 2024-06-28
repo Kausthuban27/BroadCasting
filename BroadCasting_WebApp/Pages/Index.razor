@@ -1,4 +1,5 @@
 ﻿@page "/"
+@inject NavigationManager navigator
 @inject IParticipantsServices participantService
 
 <PageTitle>Home</PageTitle>
@@ -47,9 +48,9 @@
         </div>
     </div>
 }
-else if(!showLoginForm && isParticipant)
+else if(isParticipant)
 {
-    <EventContent OnLogout="HandleLogout"/>
+    <DisplayContent OnLogout="HandleLogout" />
 }
 else
 {

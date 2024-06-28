@@ -1,4 +1,5 @@
 ﻿using BroadCasting_WebApp.Services.HttpServices;
+using SignalRHub.Services;
 
 namespace BroadCasting_WebApp.Services
 {

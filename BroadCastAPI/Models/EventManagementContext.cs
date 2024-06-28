@@ -19,6 +19,8 @@ public partial class EventManagementContext : DbContext
 
     public virtual DbSet<Department> Departments { get; set; }
 
+    public virtual DbSet<EventContent> EventContents { get; set; }
+
     public virtual DbSet<Participant> Participants { get; set; }
 
     public virtual DbSet<Staff> Staff { get; set; }
@@ -53,6 +55,13 @@ public partial class EventManagementContext : DbContext
             entity.Property(e => e.DepartmentName)
                 .HasMaxLength(100)
                 .HasColumnName("Department_Name");
+        });
+
+        modelBuilder.Entity<EventContent>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__EventCon__3214EC07949187DF");
+
+            entity.ToTable("EventContent");
         });
 
         modelBuilder.Entity<Participant>(entity =>

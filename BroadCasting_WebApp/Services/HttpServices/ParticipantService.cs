@@ -1,9 +1,15 @@
 ﻿using BroadCastAPI;
+using BroadCastAPI.Models;
 using BroadCasting_WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using SignalRHub;
+using SignalRHub.Services;
 using System.Net;
+using TableDependency.SqlClient;
+using TableDependency.SqlClient.Base.EventArgs;
 
 namespace BroadCasting_WebApp.Services.HttpServices
 {
@@ -11,9 +17,17 @@ namespace BroadCasting_WebApp.Services.HttpServices
     {
         private readonly BroadCastAPIConfig _config;
         private readonly ICRUDService _crudService;
+        private readonly IHubContextAccessor _hubContext;
         private readonly Uri _baseUrl, _loginParticipantUrl, _broadcastUrl;
-        public ParticipantService(IOptions<BroadCastAPIConfig> config, ICRUDService service)
+        private readonly SqlTableDependency<EventContent> _sqlTableDependency;
+        private readonly string connectionString;
+        public ParticipantService(IOptions<BroadCastAPIConfig> config, ICRUDService service, IHubContextAccessor hubContext)
         {
+            connectionString = "Data Source=CEI2103\\SQLEXPRESS;Initial Catalog=EventManagement;Trusted_Connection=True;";
+            _hubContext = hubContext;
+            _sqlTableDependency = new SqlTableDependency<EventContent>(connectionString, "EventContent");
+            _sqlTableDependency.OnChanged += Changed;
+            _sqlTableDependency.Start();
             _config = config.Value;
             _crudService = service;
             if (_config.BaseUrl == null)
@@ -25,6 +39,16 @@ namespace BroadCasting_WebApp.Services.HttpServices
             _loginParticipantUrl = new(baseUrl, RouteConstants.LoginParticipant);
             _broadcastUrl = new(baseUrl, RouteConstants.BroadcastToParticipants);
         }
+
+        private void Changed(object sender, RecordChangedEventArgs<EventContent> e)
+        {
+            Task.Run(async () =>
+            {
+                var content = await _crudService.GetContent<EventContent>(_broadcastUrl);
+                await _hubContext.HubContext.Clients.All.SendAsync("RefreshContent", content);
+            }).ConfigureAwait(false);
+        }
+
         public async Task<IActionResult> AddParticipants<T>(T entity) where T : class
         {
             return await _crudService.AddParticipant<T>(_baseUrl, entity);

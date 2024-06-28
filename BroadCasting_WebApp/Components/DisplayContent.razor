@@ -39,18 +39,33 @@
         var res = await participantService.GetEventContent<EventContent>();
         eventContents.AddRange(res);
         StateHasChanged();
-
-        hubConnection = new HubConnectionBuilder()
-        .WithUrl(Navigation.ToAbsoluteUri("/eventHub"))
-        .Build();
-
-        hubConnection.On<List<EventContent>>("RefreshContent", contents =>
+        try
         {
-            eventContents = contents;
-            InvokeAsync(StateHasChanged);
-        });
+            hubConnection = new HubConnectionBuilder()
+            .WithUrl(Navigation.ToAbsoluteUri("/eventHub"))
+            .Build();
 
-        await hubConnection.StartAsync();
+            hubConnection.On<List<EventContent>>("RefreshContent", contents =>
+            {
+                Console.WriteLine("Received new content from SignalR");
+                eventContents = contents;
+                InvokeAsync(StateHasChanged);
+            });
+
+            try
+            {
+                await hubConnection.StartAsync();
+                Console.WriteLine("SignalR connection started");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error starting SignalR connection: {ex.Message}");
+            }
+        }
+        catch
+        {
+            throw new ArgumentException();
+        }
     }
     private async Task LogOut()
     {

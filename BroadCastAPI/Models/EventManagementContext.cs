@@ -30,7 +30,7 @@ public partial class EventManagementContext : DbContext
     public virtual DbSet<Subject> Subjects { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer();
+        => optionsBuilder.UseSqlServer("Data Source=CEI2103\\SQLEXPRESS;Initial Catalog=EventManagement;Integrated Security=True;Connect Timeout=60;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
